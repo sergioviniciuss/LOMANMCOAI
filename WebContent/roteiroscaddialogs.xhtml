@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:udesc="http://java.sun.com/jsf/composite/udesc">
+<!--DIALOG DELETE SLIDE-->
+
+        <h:form id="formConfirmDialogSlide">                    
+            <p:confirmDialog message="#{msg.confirmDelete}" 
+                             width="200"
+                             header="#{msg.confirm}"
+                             severity="alert"
+                             widgetVar="confirmDeleteSlide">  
+                <p:commandButton value="#{msg.yes}"                                                            
+                                 oncomplete="confirmDeleteSlide.hide()"
+                                 actionListener="#{cadRoteiro.deleteSlide()}"
+                                 update=":tabUnidadeSlideTarefa:formCadastroSlide
+                                 :tabUnidadeSlideTarefa:formTabelaSlides
+                                 :messages">                                 
+                </p:commandButton>
+                <p:commandButton value="#{msg.no}" 
+                                 oncomplete="confirmDeleteSlide.hide()"
+                                 actionListener="#{cadProjeto.novoSlide()}"/>  
+            </p:confirmDialog>
+        </h:form>
+        <!--***-->
+
+        <!--DIALOG DELETE TAREFA-->
+        <h:form id="formConfirmDialogTarefa">        
+            <p:confirmDialog message="#{msg.confirmDelete}" 
+                             width="200"
+                             header="#{msg.confirm}"
+                             severity="alert"
+                             widgetVar="confirmDeleteTarefa">  
+                <p:commandButton value="#{msg.yes}" 
+                                 oncomplete="confirmDeleteTarefa.hide()"
+                                 actionListener="#{cadRoteiro.deleteTarefa()}"
+                                 update=":tabUnidadeSlideTarefa:formCadastroTarefas
+                                 :tabUnidadeSlideTarefa:formTabelaTarefas
+                                 :messages">                                 
+                </p:commandButton>
+                <p:commandButton value="#{msg.no}" 
+                                 oncomplete="confirmDeleteTarefa.hide()"
+                                 actionListener="#{cadRoteiro.novaTarefa()}"/>  
+            </p:confirmDialog>
+        </h:form>
+        <!--***-->
+
+        </ui:composition>

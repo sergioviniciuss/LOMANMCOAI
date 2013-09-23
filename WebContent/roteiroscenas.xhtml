@@ -1,0 +1,56 @@
+<!-- POPUP STORYBOARD (POR UNIDADE) -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:udesc="http://java.sun.com/jsf/composite/udesc">
+
+	<h:form id="formTabelaSlides">
+		<p:dataTable id="roteiroSlides" rowKey="#{slide.titulo}"
+			emptyMessage="#{msg.noSlidesFound}"
+			value="#{cadRoteiro.registro.slides}" var="slide" pageLinks="3"
+			rowIndexVar="linha"
+			style="max-width: 400px; 
+                         min-width: 200px;
+                         width: 400px;">
+			<p:column>
+				<f:facet name="header">
+                        #
+                    </f:facet>
+				<h:outputText value="#{linha+1}" />
+			</p:column>
+			<p:column style="max-width: 260px;">
+				<f:facet name="header">
+                        #{msg.slides}
+                    </f:facet>
+				<h:outputText value="#{slide.titulo}" />
+			</p:column>
+			<p:column>
+				<p:commandButton id="editScene" icon="ui-icon-pencil" oncomplete="dialogTarefa.show()"
+						update=":tabUnidadeSlideTarefa:formCadastroTarefas">
+					
+					<f:setPropertyActionListener value="#{slide}"
+						target="#{cadRoteiro.selecSlide}" />
+						
+				</p:commandButton>
+				<p:tooltip for="editScene" value="#{msg.saveTooltip}"/>
+
+				<p:commandButton icon="ui-icon ui-icon-close"
+					oncomplete="confirmDeleteSlide.show()" process="@this">
+					<f:setPropertyActionListener value="#{slide}"
+						target="#{cadRoteiro.selecSlide}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:commandButton id="addScene" value="#{msg.add}" style="float:right;"
+			actionListener="#{cadRoteiro.novoSlide()}"
+			oncomplete="dialogTarefa.show()"
+			update=":tabUnidadeSlideTarefa:formCadastroTarefas"/>
+
+		<p:tooltip for="addScene" value="#{msg.addSceneTooltip}"/>
+	</h:form>
+
+	<ui:include src="roteirodialogtarefa.xhtml"/>
+
+</ui:composition>

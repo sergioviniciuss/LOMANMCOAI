@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"                
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:udesc="http://java.sun.com/jsf/composite/udesc">
+
+    <p:dialog header="#{msg.sceneUpper}" 
+              widgetVar="dialogTarefa"               
+              modal="true" 
+              height="550" 
+              width="900" 
+              resizable="false"
+              appendToBody="true"
+              id="dlgTarefa">
+        <h:form id="formCadastroTarefas">
+	        <h:panelGrid columns="2">
+	        	<h:outputText value="#{msg.project} : "/>
+	            <h:outputText value="#{empty cadRoteiro.selecUnidade.projeto.titulo ? '-' : cadRoteiro.selecUnidade.projeto.titulo}"/>
+	            <h:outputText value="#{msg.learningUnity} : "/>
+	            <h:outputText value="#{empty cadRoteiro.selecUnidade.nome ? '-' : cadRoteiro.selecUnidade.nome}"/>                                
+	        </h:panelGrid>
+        
+            <h:panelGrid columns="2">  
+	            <p:tabView>
+		            <p:tab title="#{msg.contents}">
+		                <p:dataTable emptyMessage="#{msg.noContentsFound}" 
+		                             value="#{cadRoteiro.selecUnidade.conteudos}" 
+		                             var="conteudo"
+		                             paginator="true"
+		                             paginatorPosition="top"
+		                             rows="5"  
+		                             paginatorTemplate="{CurrentPageReport}  
+		                             {FirstPageLink} 
+		                             {PreviousPageLink} 
+		                             {PageLinks} 
+		                             {NextPageLink} 
+		                             {LastPageLink} 
+		                             {RowsPerPageDropdown}">
+		                    <p:column>
+		                        <f:facet name="header">
+		                            #{msg.contents}
+		                        </f:facet>
+		                        <h:outputText value="#{conteudo.descricao}"/>
+		                    </p:column>                       
+		                </p:dataTable>
+		            </p:tab>
+		            <p:tab title="#{msg.assessmentForms}">
+		                <p:dataTable emptyMessage="#{msg.noAssessmentFormsFound}" 
+		                             value="#{cadRoteiro.selecUnidade.formasAvaliacao}"
+		                             var="formaAvaliacao"
+		                             paginator="true"
+		                             paginatorPosition="top"
+		                             rows="5"  
+		                             paginatorTemplate="{CurrentPageReport}  
+		                             {FirstPageLink} 
+		                             {PreviousPageLink} 
+		                             {PageLinks} 
+		                             {NextPageLink} 
+		                             {LastPageLink} 
+		                             {RowsPerPageDropdown}">
+		                    <p:column>
+		                        <f:facet name="header">
+		                            #{msg.assessmentForms}
+		                        </f:facet>
+		                        <h:outputText value="#{formaAvaliacao.descricao}"/>
+		                    </p:column>                        
+		                </p:dataTable>
+		            </p:tab>
+		        </p:tabView>
+		        <h:panelGrid columns="1">
+			        <h:panelGrid columns="2">            
+		                    <h:outputText value="#{msg.title}:"/>
+		                    <p:inputText id="tituloSlide"
+		                                 value="#{cadRoteiro.selecSlide.titulo}" 
+		                                 maxlength="50"                                     
+		                                 size="48">
+		                        <f:validateLength maximum="50"/>
+		                    </p:inputText>
+					</h:panelGrid>
+					<p:editor id="editorCena" widgetVar="editorDoSlide" value="#{cadRoteiro.selecSlide.descricao}" width="400" height="300"/>
+					<h:panelGrid columns="2" style="width:100%;float:left;">
+						<h:outputText value="Cena: " style="align:left;"/>
+						<h:panelGrid columns="2" style="width:100%;float:right">
+							<p:commandButton id="addSlide" style="float:right;"
+		                                     value="#{msg.save}"                                       
+		                                     actionListener="#{cadRoteiro.addSlide()}"
+		                                     update=":tabUnidadeSlideTarefa:formTabelaSlides"
+		                                     oncomplete="dialogTarefa.hide()"
+		                                     />
+							<p:commandButton id="cancelAddSlide" style="float:right;" value="#{msg.cancel}" oncomplete="dialogTarefa.hide()"/>
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+
+</ui:composition> 

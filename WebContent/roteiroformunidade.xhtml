@@ -1,0 +1,156 @@
+<!-- Popup Storyboard -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:udesc="http://java.sun.com/jsf/composite/udesc">
+
+
+<!-- 	<h:panelGrid columns="1"> -->
+		<h:form id="formDadosUnidade">
+			<h:panelGrid columns="2">
+				<h:outputText value="#{msg.project}: " />
+				<h:outputText
+					value="#{empty cadRoteiro.selecUnidade.projeto.titulo ? '-' : cadRoteiro.selecUnidade.projeto.titulo}" />
+				<h:outputText value="#{msg.unit}: " />
+				<h:outputText
+					value="#{ empty cadRoteiro.selecUnidade.nome ? '-' : cadRoteiro.selecUnidade.nome}" />
+			</h:panelGrid>
+		</h:form>
+		<br/>
+		<h:form id="formDadosRoteiroIntroducao">
+			<h:panelGrid columns="5">
+				<f:facet style="float:left;" name="header">  
+		        	#{msg.type}  
+		        </f:facet>
+				<h:outputText style="width:150px;" value="#{msg.introduction}: " />
+				<f:facet name="header">  
+	           		#{msg.objective} 
+		        </f:facet>
+				<p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="ilustrar algoritmo de busca em profundidade no grafo conexo." itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar a importancia da divisão celular no aprendizado sobre células" itemValue="3" />  
+		        </p:selectOneMenu>  
+				<f:facet name="header">  
+	           		#{msg.activity}
+		        </f:facet>
+				<p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Indicar melhor caminho percorrido no grafo." itemValue="1" />  
+		            <f:selectItem itemLabel="Distinguir fatos que colaborem com o desempenho do algoritmo de profundidade." itemValue="2" />   
+		        </p:selectOneMenu>  
+				<f:facet name="header">  
+	           		#{msg.activity}:  
+		        </f:facet>
+				<p:commandButton id="addSceneIntrod" value="#{msg.add}" 
+					oncomplete="dialogAddIntrodScene.show()"
+					update=":tabUnidadeSlideTarefa:formAddIntrodScene"
+					/>
+				
+				<f:facet name="header">  
+	           		#{msg.activity}:  
+		        </f:facet>
+				<p:commandButton id="listScenesIntrod" value="#{msg.listScenes}"
+					oncomplete="dialogListIntrodScenes.show()"
+					update=":tabUnidadeSlideTarefa:formListaCenasIntrod"
+					/>
+			</h:panelGrid>
+		</h:form>
+
+		<h:form id="formDadosRoteiroProcesso">
+			<h:panelGrid columns="5">
+				<h:outputText style="width:150px;" value="#{msg.process}: " />
+				<p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Explicar como funciona a divisão celular" itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar a importancia da divisão celular no aprendizado sobre células" itemValue="3" />  
+		        </p:selectOneMenu>
+		        <p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Explicar algo" itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar" itemValue="3" />  
+		        </p:selectOneMenu>
+		        <p:commandButton id="addSceneProcess" value="#{msg.add}" 
+		        	
+		        />
+		        <p:commandButton id="listScenesProcess" value="#{msg.listScenes}"
+		        	oncomplete="dialogListProcessScenes.show()"
+					update=":tabUnidadeSlideTarefa:formListaCenasProcess"
+		        />
+		         
+			</h:panelGrid>
+		</h:form>
+
+		<h:form id="formDadosRoteiroConclusao">
+			<h:panelGrid columns="5">
+				<h:outputText style="width:150px;" value="#{msg.conclusion}: " />
+				<p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Explicar como funciona a divisão celular" itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar a importancia da divisão celular no aprendizado sobre células" itemValue="3" />  
+		        </p:selectOneMenu>
+		        <p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Explicar algo" itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar" itemValue="3" />  
+		        </p:selectOneMenu>
+		        <p:commandButton id="addSceneConcl" value="#{msg.add}" />
+		        <p:commandButton id="listScenesConcl" value="#{msg.listScenes}"/>
+			</h:panelGrid>
+		</h:form>
+
+		<h:form id="formDadosRoteiroAvaliacao">
+			<h:panelGrid columns="5">
+				<h:outputText  style="width:150px;" value="#{msg.evaluation}: " />
+				<p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Explicar como funciona a divisão celular" itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar a importancia da divisão celular no aprendizado sobre células" itemValue="3" />  
+		        </p:selectOneMenu>
+		        <p:selectOneMenu style="width:150px;">  
+		            <f:selectItem itemLabel="#{msg.select}" itemValue="" />  
+		            <f:selectItem itemLabel="Explicar algo" itemValue="1" />  
+		            <f:selectItem itemLabel="Ensinar patati patata" itemValue="2" />  
+		            <f:selectItem itemLabel="Ensinar" itemValue="3" />  
+		        </p:selectOneMenu>
+		        <p:commandButton id="addSceneEval" value="#{msg.add}" />
+		        <p:commandButton id="listScenesEval" value="#{msg.listScenes}"/>
+			</h:panelGrid>
+		</h:form>
+		
+				
+<!-- 		<p:dataTable emptyMessage="#{msg.noObjectivesFound}" 
+			value="#{cadRoteiro.selecUnidade.objetivos}" var="objetivo"
+			paginator="true" paginatorPosition="top" rows="5"
+			paginatorTemplate="{CurrentPageReport}  
+                          {FirstPageLink} 
+                          {PreviousPageLink} 
+                          {PageLinks} 
+                          {NextPageLink} 
+                          {LastPageLink} 
+                          {RowsPerPageDropdown}">
+			<p:column>
+				<f:facet name="header">
+                          #{msg.objectives}
+                      </f:facet>
+					<h:outputText value="#{objetivo.descricao}" />
+				</p:column>
+		</p:dataTable>-->
+			
+				
+			
+<!-- 		<ui:include src="roteiroscenas.xhtml"/> -->
+<!-- 	</h:panelGrid> -->
+<ui:include src="roteirocenaintrod.xhtml"/>
+<ui:include src="roteirolistacenasintrod.xhtml"/>
+<ui:include src="roteirolistacenasprocess.xhtml"/>
+
+</ui:composition>
